@@ -170,7 +170,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &286116009
 GameObject:
@@ -219,7 +219,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &295269078
 GameObject:
@@ -268,7 +268,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &352239372
 GameObject:
@@ -317,7 +317,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &435415587
 GameObject:
@@ -803,7 +803,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &953283446
 GameObject:
@@ -1413,7 +1413,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1196425470
 GameObject:
@@ -1807,7 +1807,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1348261871
 GameObject:
@@ -2201,7 +2201,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1710691289
 GameObject:
@@ -2250,7 +2250,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 240.41, y: 238.46, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1909231800
 GameObject:
