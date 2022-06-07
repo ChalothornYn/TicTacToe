@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TicTacToe : MonoBehaviour
+public class TicTacToeS : MonoBehaviour
 {
     private Collider2D[] _grid = new Collider2D[9];
 
@@ -20,12 +20,13 @@ public class TicTacToe : MonoBehaviour
     private enum State
     {
         Rest,
+        Start,
         Player1Turn,
         Player2Turn,
         CheckResult,
     }
 
-    private State _stateFlow = State.Rest;
+    private State _stateFlow = State.Start;
     
     private void Start()
     {
@@ -46,21 +47,28 @@ public class TicTacToe : MonoBehaviour
     {
         switch (_stateFlow)
         {
-            case State.Rest:
+            case State.Rest: 
+                break;
+            case State.Start:
                 // Choose Game Mode
                 if(playAsPlayer1)
                     _stateFlow = State.Player1Turn;
                 break;
             case State.Player1Turn:
-                
+                _stateFlow = State.Player2Turn;
                 break;
             case State.Player2Turn:
+                //_stateFlow = Sta
                 break;
             case State.CheckResult:
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                Debug.Log("<color=red>Error : Not Game State</color>");
+                _stateFlow = State.Start;
+                break;
         }
+        
+        _stateFlow = State.Rest;
         
 
 
