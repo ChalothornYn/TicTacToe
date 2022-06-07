@@ -15,7 +15,6 @@ namespace TicTacToe
 
         [Header("Mode : ")]
         [SerializeField] private bool playAsPlayer1 = true;
-
         public bool cpuAsPlayer2;
 
         [Header("Input Setting : ")]

@@ -13,7 +13,7 @@ namespace TicTacToe
 
         public int index;
 
-        private void Start()
+        private void Awake()
         {
             _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
             _collider2D = GetComponent<Collider2D>();

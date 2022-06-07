@@ -10,8 +10,6 @@ namespace TicTacToe
         {
             Debug.Log("<color=lime>Player 1 turn!</color>");
             _player = board.player1;
-            
-            
         }
 
         public override void UpdateState(BoardStateManager board)
