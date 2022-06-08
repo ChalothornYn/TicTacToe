@@ -25,17 +25,14 @@ namespace TicTacToe
             mark = msk;
             _textMeshProUGUI.text = msk.ToString().ToUpper();
             _textMeshProUGUI.color = color;
+            _collider2D.enabled = false;
             isMarked = true;
-        }
-
-        public void SetCollider(bool status)
-        {
-            _collider2D.enabled = status;
         }
 
         public void ResetMark()
         {
             _textMeshProUGUI.text = "";
+            _collider2D.enabled = true;
         }
     }
 }
