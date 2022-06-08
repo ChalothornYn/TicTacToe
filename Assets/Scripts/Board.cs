@@ -23,7 +23,19 @@ namespace TicTacToe
             _boxes = GetComponentsInChildren<Box>();
         }
 
-        public bool SetMask(Player player)
+        public void ResetBoard()
+        {
+            boardArray = new Player.Marks[boardDimension * boardDimension];
+
+            markCount = 0;
+            
+            foreach (var box in _boxes)
+            {
+                box.ResetMark();
+            }
+        }
+        
+        public bool PlayerSetMask(Player player)
         {
             var pos = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.OverlapPoint(pos, boxLayerMask);
@@ -41,17 +53,10 @@ namespace TicTacToe
             
             return true;
         }
-
-        public void ResetBoard()
+        
+        public void CPUSetMark(Player player)
         {
-            boardArray = new Player.Marks[boardDimension * boardDimension];
-
-            markCount = 0;
-            
-            foreach (var box in _boxes)
-            {
-                box.ResetMark();
-            }
+           
         }
 
         private bool CheckTie()

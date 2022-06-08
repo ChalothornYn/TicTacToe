@@ -17,20 +17,11 @@ namespace TicTacToe
         {
             if (!Input.GetMouseButtonDown(0)) return;
 
-            var success = game.board.SetMask(_player);
+            var success = game.board.PlayerSetMask(_player);
 
             if (!success) return;
             
-            var canContinue = game.DetermineGameResult(_player);
-            
-            if (canContinue)
-            {
-                game.ChangeState(game.Player2Turn);
-            }
-            else
-            {
-                game.ChangeState(game.GameOver);
-            }
+            game.DetermineGameResult(_player, game.Player2Turn);
         }
     }
 }

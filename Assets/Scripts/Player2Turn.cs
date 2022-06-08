@@ -5,7 +5,7 @@ namespace TicTacToe
     public class Player2Turn : GameBaseState
     {
         private Player _player;
-        
+
         public override void EnterState(GameStateManager game)
         {
             Debug.Log("<color=lime>Player 2 turn!</color>");
@@ -15,22 +15,21 @@ namespace TicTacToe
 
         public override void UpdateState(GameStateManager game)
         {
-            if (!Input.GetMouseButtonDown(0)) return;
-
-            var success = game.board.SetMask(_player);
-
-            if (!success) return;
-            
-            var canContinue = game.DetermineGameResult(_player);
-            
-            if (canContinue)
+            if (game.cpuAsPlayer2)
             {
-                game.ChangeState(game.Player1Turn);
+                // CPU decide which box to mark
+                game.board.CPUSetMark(_player);
             }
             else
             {
-                game.ChangeState(game.GameOver);
+                if (!Input.GetMouseButtonDown(0)) return;
+
+                var success = game.board.PlayerSetMask(_player);
+
+                if (!success) return;
             }
+            
+            game.DetermineGameResult(_player, game.Player1Turn);
         }
     }
 }

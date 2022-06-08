@@ -52,14 +52,14 @@ namespace TicTacToe
             _currentState.EnterState(this);
         }
 
-        public bool DetermineGameResult(Player player)
+        public void DetermineGameResult(Player player, GameBaseState nextState)
         {
-            // return true = continue playing, return false = have winner or tie go to GameOver state
             var score = board.CheckWinner(player.mark);
 
-            if (score < 0)
+            if (score < 0) // Continue playing
             {
-                return true;
+                ChangeState(nextState);
+                return;
             } 
             
             if (score == 0)
@@ -71,7 +71,8 @@ namespace TicTacToe
                 Winner = player;
             }
 
-            return false;
+            ChangeState(GameOver);
+            return;
         }
     }
 
