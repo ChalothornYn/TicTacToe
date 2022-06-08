@@ -6,34 +6,38 @@ namespace TicTacToe
 {
     public class GameStateManager : MonoBehaviour
     {
-        [Header("Player Setting : ")] public Player player1;
+        [Header("Player Setting : ")]
+        public Player player1;
         public Player player2;
 
-        [Header("Mode : ")] [SerializeField] private bool playAsPlayer1 = true;
+        [Header("Mode : ")] 
+        public bool goFirst = true;
         public bool cpuAsPlayer2;
 
-        public Board board;
+        [Space] public Board board;
 
         public Player? Winner;
 
         // Possible State
-        public Player1Turn Player1Turn = new Player1Turn();
-        public Player2Turn Player2Turn = new Player2Turn();
-        public GameOver GameOver = new GameOver();
+        public readonly Player1Turn Player1Turn = new Player1Turn();
+        public readonly Player2Turn Player2Turn = new Player2Turn();
+        public readonly GameOver GameOver = new GameOver();
 
         private GameBaseState _currentState;
 
         private void Start()
         {
-            board = GetComponent<Board>();
-
+            UIManager.Instance.ResetGame();
+            
             board.ResetBoard();
 
-            if (playAsPlayer1)
+            if (goFirst)
                 _currentState = Player1Turn;
             else
                 _currentState = Player2Turn;
-
+            
+            UIManager.Instance.StartGame();
+            
             _currentState.EnterState(this);
         }
 
@@ -68,20 +72,6 @@ namespace TicTacToe
             }
 
             return false;
-
-            // var isTie = board.CheckTie();
-            // if (isTie)
-            // {
-            //     Winner = null;
-            //     return false;
-            // }
-            //
-            // var score = board.CheckWinner(player.mark);
-            //
-            // if (score < 0) return true; // Not win continue playing
-            //
-            // Winner = player;
-            // return false;
         }
     }
 

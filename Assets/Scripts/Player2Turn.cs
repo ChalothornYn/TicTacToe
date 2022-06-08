@@ -10,6 +10,7 @@ namespace TicTacToe
         {
             Debug.Log("<color=lime>Player 2 turn!</color>");
             _player = game.player2;
+            UIManager.Instance.ShowTurn(_player);
         }
 
         public override void UpdateState(GameStateManager game)

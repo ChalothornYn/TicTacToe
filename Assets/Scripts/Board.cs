@@ -7,16 +7,17 @@ namespace TicTacToe
 {
     public class Board : MonoBehaviour
     {
-        public int boardDimension;
+        [Space] public int boardDimension;
 
-        public int markCount = 0;
+        [Space] public int markCount = 0;
         
-        public LayerMask boxLayerMask;
+        [Space] public LayerMask boxLayerMask;
+        
+        [Space] public Player.Marks[] boardArray;
         
         private Box[] _boxes;
-        public Player.Marks[] boardArray;
 
-        private void Start()
+        private void Awake()
         {
             boardArray = new Player.Marks[boardDimension * boardDimension];
             _boxes = GetComponentsInChildren<Box>();
@@ -60,8 +61,6 @@ namespace TicTacToe
 
         public int CheckWinner(Player.Marks mark)
         {
-            if (CheckTie()) return 0;
-
             var won = true;
 
             #region Horizontal
@@ -135,6 +134,8 @@ namespace TicTacToe
             if (won) return 1;
             
             #endregion
+            
+            if (CheckTie()) return 0;
             
             return -1; // Game not over yet, continue playing
         }

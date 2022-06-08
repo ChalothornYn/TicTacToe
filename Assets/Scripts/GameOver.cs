@@ -15,8 +15,9 @@ namespace TicTacToe
                 Debug.Log($"<color=orange>Winner is {game.Winner.Value.name}</color>");
             }
             
-            game.board.ResetBoard();
-            game.ChangeState(game.Player1Turn);
+            UIManager.Instance.GameOver(game.Winner);
+            
+            //game.ChangeState(game.Player1Turn);
         }
 
         public override void UpdateState(GameStateManager game)
