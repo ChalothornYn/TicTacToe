@@ -25,18 +25,19 @@ namespace TicTacToe
         // Possible State
         public Player1Turn Player1Turn = new Player1Turn();
         public Player2Turn Player2Turn = new Player2Turn();
-        public CheckWinner CheckWinner = new CheckWinner();
+        public GameOver GameOver = new GameOver();
         
         private BoardBaseState _currentState;
+
+        public Board board;
         
         private void Start()
         {
             boardArray = new Player.Marks[boardWidth * boardHigh];
 
-            foreach (var box in GetComponentsInChildren<Box>())
-            {
-                box.ResetMark();
-            }
+            board = GetComponent<Board>();
+
+            board.ResetMask();
             
             if (playAsPlayer1)
                 _currentState = Player1Turn;
@@ -55,6 +56,28 @@ namespace TicTacToe
         {
             _currentState = state;
             _currentState.EnterState(this);
+        }
+
+        public bool CheckWinner(Player.Marks mark)
+        {
+            var win = true;
+            
+            // horizontal
+            for (var h = 0; h < boardHigh; h++)
+            {
+                win = true;
+                for (var w = 0; w < boardWidth; w++)
+                {
+                    var index = w + (boardWidth * h); // 0 1 2 // 3 4 5 // 6 7 8
+                    if (boardArray[index] != mark)
+                    {
+                        win = false;
+                        break;
+                    }
+                }
+                if (win) return true;
+            }
+            return false;
         }
     }
 

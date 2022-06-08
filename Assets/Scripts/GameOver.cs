@@ -2,7 +2,7 @@
 
 namespace TicTacToe
 {
-    public class CheckWinner : BoardBaseState
+    public class GameOver : BoardBaseState
     {
         public override void EnterState(BoardStateManager board)
         {

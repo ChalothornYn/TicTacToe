@@ -24,11 +24,11 @@ namespace TicTacToe
             Debug.Log($"<color=red>{hit.name} : {_player.mark}</color>");
             
             var box = hit.GetComponent<Box>();
-            var index = box.SetMarkAs(_player.mark, _player.color);
+            // var index = box.Set(_player.mark, _player.color);
+            //
+            // board.boardArray[index] = _player.mark;
             
-            board.boardArray[index] = _player.mark;
-            
-            board.ChangeState(board.CheckWinner);
+            board.ChangeState(board.GameOver);
         }
     }
 }

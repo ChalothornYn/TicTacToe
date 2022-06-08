@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace TicTacToe
@@ -21,15 +20,17 @@ namespace TicTacToe
             index = transform.GetSiblingIndex();
         }
 
-        public int SetMarkAs(Player.Marks msk, Color color)
+        public void Set(Player.Marks msk, Color color)
         {
             mark = msk;
             _textMeshProUGUI.text = msk.ToString().ToUpper();
             _textMeshProUGUI.color = color;
-            _collider2D.enabled = false;
             isMarked = true;
+        }
 
-            return index;
+        public void SetCollider(bool status)
+        {
+            _collider2D.enabled = status;
         }
 
         public void ResetMark()
