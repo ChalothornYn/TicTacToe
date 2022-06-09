@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-namespace TicTacToe
+namespace TicTacToe.GameState
 {
     public class GameOver : GameBaseState
     {
@@ -15,9 +16,8 @@ namespace TicTacToe
                 Debug.Log($"<color=orange>Winner is {game.Winner.Value.name}</color>");
             }
             
-            UIManager.Instance.GameOver(game.Winner);
-            
-            //game.ChangeState(game.Player1Turn);
+            UIManager.Instance.GameOver(game.Winner); ;
+            UIManager.Instance.playAgain.GetComponent<Button>().onClick.AddListener(() => game.ChangeState(game.GameStart));
         }
 
         public override void UpdateState(GameStateManager game)

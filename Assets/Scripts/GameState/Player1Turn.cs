@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TicTacToe
+namespace TicTacToe.GameState
 {
     public class Player1Turn : GameBaseState
     {
@@ -17,11 +17,11 @@ namespace TicTacToe
         {
             if (!Input.GetMouseButtonDown(0)) return;
 
-            var success = game.board.PlayerSetMask(_player);
+            var success = game.boardManager.PlayerSetMask(_player);
 
             if (!success) return;
             
-            game.DetermineGameResult(_player, game.Player2Turn);
+            game.DetermineGameResult(game.Player2Turn);
         }
     }
 }

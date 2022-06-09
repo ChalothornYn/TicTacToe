@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using TicTacToe.GameState;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,15 @@ namespace TicTacToe
     {
         [Header("Mode : ")] 
         public GameObject modeObj;
+        [Space]
+        public Button easy;
+        public Button medium;
+        public Button hard;
+        [Space]
+        public Button multiplayer;
+        [Space]
+        public Toggle player1GoFirst;
+        
         
         [Header("Turn UI : ")]
         public TextMeshProUGUI playerTurn;
@@ -18,7 +28,9 @@ namespace TicTacToe
         public TextMeshProUGUI result;
         public GameObject resultObj;
         public GameObject tieObj;
-
+        
+        [Space] public GameObject playAgain; 
+        
         public static UIManager Instance { get; private set; }
         
         private void Awake() 
@@ -43,6 +55,7 @@ namespace TicTacToe
             
             resultObj.SetActive(false);
             tieObj.SetActive(false);
+            playAgain.SetActive(false);
         }
 
         public void StartGame()
@@ -50,7 +63,6 @@ namespace TicTacToe
             modeObj.SetActive(false);
             
             turnObj.SetActive(true);
-
         }
 
         public void ShowTurn(Player player)
@@ -74,6 +86,8 @@ namespace TicTacToe
                 result.color = winner.Value.color;
                 resultObj.SetActive(true);
             }
+            
+            playAgain.SetActive(true);
         }
     }
 }
