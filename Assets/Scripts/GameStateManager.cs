@@ -14,7 +14,7 @@ namespace TicTacToe
         public bool goFirst = true;
         public bool cpuAsPlayer2;
 
-        [Space] public Board board;
+        [Space] public BoardManager boardManager;
 
         public Player? Winner;
 
@@ -29,7 +29,8 @@ namespace TicTacToe
         {
             UIManager.Instance.ResetGame();
             
-            board.ResetBoard();
+            boardManager.Initialize();
+            boardManager.Board.ResetBoard();
 
             if (goFirst)
                 _currentState = Player1Turn;
@@ -43,10 +44,10 @@ namespace TicTacToe
 
         private void Update()
         {
-            _currentState.UpdateState(this);
+            _currentState?.UpdateState(this);
         }
 
-        public void ChangeState(GameBaseState state)
+        private void ChangeState(GameBaseState state)
         {
             _currentState = state;
             _currentState.EnterState(this);
@@ -54,7 +55,7 @@ namespace TicTacToe
 
         public void DetermineGameResult(Player player, GameBaseState nextState)
         {
-            var score = board.CheckWinner(player.mark);
+            var score = boardManager.Board.CheckWinner(player.mark);
 
             if (score < 0) // Continue playing
             {

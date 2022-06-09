@@ -18,13 +18,13 @@ namespace TicTacToe
             if (game.cpuAsPlayer2)
             {
                 // CPU decide which box to mark
-                game.board.CPUSetMark(_player);
+                game.boardManager.CPUSetMark(_player);
             }
             else
             {
                 if (!Input.GetMouseButtonDown(0)) return;
 
-                var success = game.board.PlayerSetMask(_player);
+                var success = game.boardManager.PlayerSetMask(_player);
 
                 if (!success) return;
             }

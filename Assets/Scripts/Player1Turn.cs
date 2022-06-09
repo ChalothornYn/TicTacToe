@@ -17,7 +17,7 @@ namespace TicTacToe
         {
             if (!Input.GetMouseButtonDown(0)) return;
 
-            var success = game.board.PlayerSetMask(_player);
+            var success = game.boardManager.PlayerSetMask(_player);
 
             if (!success) return;
             
