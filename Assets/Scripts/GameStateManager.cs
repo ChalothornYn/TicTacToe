@@ -14,14 +14,24 @@ namespace TicTacToe
         private Player[] players;
 
         [Header("Mode : ")] 
-        public bool playAsPlayer1 = true;
-        public bool cpuAsPlayer2;
+        public bool goFirst = true;
+        public bool cpuAsPlayer2 = true;
+
+        public enum Level
+        {
+            Easy,
+            Medium,
+            Hard,
+        }
+        [Header("CPU Level : ")]
+        public Level cpuLevel = Level.Easy;
 
         [Space] public BoardManager boardManager;
 
         public Player? Winner;
 
         // Possible State
+        public readonly GameStart GameStart = new GameStart();
         public readonly Player1Turn Player1Turn = new Player1Turn();
         public readonly Player2Turn Player2Turn = new Player2Turn();
         public readonly GameOver GameOver = new GameOver();
@@ -32,21 +42,11 @@ namespace TicTacToe
 
         private void Start()
         {
-            UIManager.Instance.ResetGame();
-
             players = new[] {player1, player2};
             
             boardManager.Initialize();
-            boardManager.Board.ResetBoard();
-
-            if (playAsPlayer1)
-                _currentState = Player1Turn;
-            else
-                _currentState = Player2Turn;
             
-            UIManager.Instance.StartGame();
-            
-            GameResult.Reset();
+            _currentState = GameStart;
             
             _currentState.EnterState(this);
         }
@@ -56,7 +56,7 @@ namespace TicTacToe
             _currentState?.UpdateState(this);
         }
 
-        private void ChangeState(GameBaseState state)
+        public void ChangeState(GameBaseState state)
         {
             _currentState = state;
             _currentState.EnterState(this);
