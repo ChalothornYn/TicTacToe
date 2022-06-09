@@ -43,10 +43,5 @@ namespace TicTacToe
             
             return true;
         }
-        
-        public void CPUSetMark(Cpu cpu)
-        {
-            cpu.CalculateBestMove(Board);
-        }
     }
 }

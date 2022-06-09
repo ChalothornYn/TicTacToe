@@ -6,16 +6,22 @@ namespace TicTacToe.GameState
     {
         private Player _player;
 
-        public Cpu Cpu;
+        private Cpu _cpu;
+
+        private float _time = 0;
+
+        private readonly float[] _waitTime = new[] {1f, 1.5f, 2f};
 
         public override void EnterState(GameStateManager game)
         {
             Debug.Log("<color=lime>Player 2 turn!</color>");
-            
+
+            _time = 0;
+
             _player = game.player2;
-            
-            Cpu = new Cpu(cpu: game.player2, player:game.player1);
-            
+
+            _cpu = new Cpu(cpu: game.player2, player: game.player1, game.cpuLevel);
+
             UIManager.Instance.ShowTurn(_player);
         }
 
@@ -23,8 +29,13 @@ namespace TicTacToe.GameState
         {
             if (game.cpuAsPlayer2)
             {
-                // CPU decide which box to mark
-                game.boardManager.CPUSetMark(Cpu);
+                _time += Time.deltaTime;
+                
+                if (_time <= _waitTime[(int)game.cpuLevel]) return;
+                
+                _cpu.Move(game.boardManager.Board);
+                
+                game.DetermineGameResult(game.Player1Turn);
             }
             else
             {
@@ -33,9 +44,11 @@ namespace TicTacToe.GameState
                 var success = game.boardManager.PlayerSetMask(_player);
 
                 if (!success) return;
+                
+                game.DetermineGameResult(game.Player1Turn);
             }
+
             
-            game.DetermineGameResult(game.Player1Turn);
         }
     }
 }

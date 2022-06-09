@@ -59,8 +59,6 @@ namespace TicTacToe
                 }
             }
 
-            //indexList.ForEach(i => Debug.Log(i));
-
             return indexList;
         }
 
