@@ -21,7 +21,7 @@ namespace TicTacToe.GameState
 
             if (!success) return;
             
-            game.DetermineGameResult(_player, game.Player2Turn);
+            game.DetermineGameResult(game.Player2Turn);
         }
     }
 }

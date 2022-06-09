@@ -24,7 +24,7 @@ namespace TicTacToe
             BoardArray = new Player.Marks[BoardDimension * BoardDimension];
 
             MarkCount = 0;
-            
+
             foreach (var box in Boxes.Values)
             {
                 box.ResetMark();
@@ -37,7 +37,7 @@ namespace TicTacToe
             BoardArray[index] = player.mark;
             //MarkCount++;
         }
-        
+
         public void SetMarkNotVisualize(int index, Player.Marks mark)
         {
             BoardArray[index] = mark;
@@ -50,7 +50,8 @@ namespace TicTacToe
         {
             for (var i = 0; i < BoardDimension; i++)
             {
-                Debug.Log($"{BoardArray[0 + 3*i].ToString()} {BoardArray[1 + 3*i].ToString()} {BoardArray[2 + 3*i].ToString()}");
+                Debug.Log(
+                    $"{BoardArray[0 + 3 * i].ToString()} {BoardArray[1 + 3 * i].ToString()} {BoardArray[2 + 3 * i].ToString()}");
             }
         }
 
@@ -69,7 +70,7 @@ namespace TicTacToe
 
             return indexList;
         }
-        
+
         public int GetEmptyCount()
         {
             return BoardArray.Count(marks => marks == Player.Marks.None);
@@ -80,85 +81,110 @@ namespace TicTacToe
             return GetEmptyCount() == 0;
         }
 
-        public int CheckWinner(Player.Marks mark)
+        public GameResult CheckWinner()
         {
-            var won = true;
+            var haveWinner = true;
+
+            Player.Marks currentMark;
 
             #region Horizontal
-            
+
             for (var h = 0; h < BoardDimension; h++)
             {
-                won = true;
-                for (var w = 0; w < BoardDimension; w++)
+                currentMark = BoardArray[BoardDimension * h];
+
+                if (currentMark != Player.Marks.None)
                 {
-                    var index = w + (BoardDimension * h); // 0 1 2 // 3 4 5 // 6 7 8
-                    if (BoardArray[index] != mark)
+                    haveWinner = true;
+                    for (var w = 0; w < BoardDimension; w++)
                     {
-                        won = false;
-                        break;
+                        var index = w + (BoardDimension * h); // 0 1 2 // 3 4 5 // 6 7 8
+                        if (BoardArray[index] != currentMark)
+                        {
+                            haveWinner = false;
+                            break;
+                        }
                     }
+
+                    if (haveWinner) return new GameResult(GameResult.GameStatus.HaveWinner, currentMark);
                 }
-                if (won) return 1;
             }
 
             #endregion
-            
+
             #region Vertical
 
             for (var w = 0; w < BoardDimension; w++)
             {
-                won = true;
-                for (var h = 0; h < BoardDimension; h++)
+                currentMark = BoardArray[w];
+                if (currentMark != Player.Marks.None)
                 {
-                    var index = w + (BoardDimension * h); // 0 3 6 // 1 4 7 // 2 5 8
-                    if (BoardArray[index] != mark)
+                    haveWinner = true;
+                    for (var h = 0; h < BoardDimension; h++)
                     {
-                        won = false;
-                        break;
+                        var index = w + (BoardDimension * h); // 0 3 6 // 1 4 7 // 2 5 8
+                        if (BoardArray[index] != currentMark)
+                        {
+                            haveWinner = false;
+                            break;
+                        }
                     }
+                    
+                    if (haveWinner) return new GameResult(GameResult.GameStatus.HaveWinner, currentMark);
                 }
-                if (won) return 1;
             }
 
             #endregion
-
+            
             #region Diagonal Right to Left
-
-            var rightMost = BoardDimension - 1;
-            won = true;
-            for (var w = 1; w <= BoardDimension; w++)
+            
+            var rightMostIdx = BoardDimension - 1;
+            currentMark = BoardArray[rightMostIdx];
+            if (currentMark != Player.Marks.None)
             {
-                var index = rightMost * w; // 2 4 6
-                if (BoardArray[index] != mark)
+                haveWinner = true;
+                for (var w = 1; w <= BoardDimension; w++)
                 {
-                    won = false;
-                    break;
+                    var index = rightMostIdx * w; // 2 4 6
+                    if (BoardArray[index] != currentMark)
+                    {
+                        haveWinner = false;
+                        break;
+                    }
                 }
-            }
-            if (won) return 1;
 
+                if (haveWinner) return new GameResult(GameResult.GameStatus.HaveWinner, currentMark);
+            }
+
+            
             #endregion
 
             #region Diagonal Left to Right
             
-            var multiplier = ((BoardDimension * BoardDimension) - 1) / (BoardDimension - 1); 
-            won = true;
-            for (var h = 0; h < BoardDimension; h++)
+            var multiplier = ((BoardDimension * BoardDimension) - 1) / (BoardDimension - 1);
+            currentMark = BoardArray[0];
+            if (currentMark != Player.Marks.None)
             {
-                var index = multiplier * h; // 0 4 8
-                if (BoardArray[index] != mark)
+                haveWinner = true;
+                for (var h = 0; h < BoardDimension; h++)
                 {
-                    won = false;
-                    break;
+                    var index = multiplier * h; // 0 4 8
+                    if (BoardArray[index] != currentMark)
+                    {
+                        haveWinner = false;
+                        break;
+                    }
                 }
+                
+                if (haveWinner) return new GameResult(GameResult.GameStatus.HaveWinner, currentMark);
             }
-            if (won) return 1;
-            
+
             #endregion
-            
-            if (CheckTie()) return 0;
-            
-            return -1; // Game not over yet, continue playing
+
+            if (CheckTie()) return new GameResult(GameResult.GameStatus.Tie, Player.Marks.None);
+
+            // Game not over yet, continue playing
+            return new GameResult(GameResult.GameStatus.ContinuePlaying, Player.Marks.None);
         }
     }
 }

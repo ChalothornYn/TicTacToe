@@ -36,41 +36,42 @@ namespace TicTacToe
 
         public int MiniMax(Board board, int depth, bool maximizingPlayer)
         {
-            var checkPlayer = maximizingPlayer ? _cpu.mark : _player.mark;
-            var result = board.CheckWinner(checkPlayer);
-            Debug.Log($"maximizingPlayer : {maximizingPlayer}, check : {checkPlayer}, result : {result}");
-            //var result = board.CheckWinner(maximizingPlayer ? _cpu.mark : _player.mark);
-            if (result >= 0)
-            {
-                return result;
-            }
-            
-            if (maximizingPlayer)
-            {
-                var bestScore = int.MinValue;
-                foreach (var idx in board.GetEmptyBoxIndex())
-                {
-                    board.SetMarkNotVisualize(idx, _cpu.mark);
-                    var score = MiniMax(board, depth + 1, false);
-                    board.SetMarkNotVisualize(idx, Player.Marks.None);
-                    bestScore = math.max(score, bestScore);
-                }
-            
-                return bestScore;
-            }
-            else
-            {
-                var bestScore = int.MaxValue;
-                foreach (var idx in board.GetEmptyBoxIndex())
-                {
-                    board.SetMarkNotVisualize(idx, _player.mark);
-                    var score = MiniMax(board, depth + 1, true);
-                    board.SetMarkNotVisualize(idx, Player.Marks.None);
-                    bestScore = math.min(score, bestScore);
-                }
-            
-                return bestScore;
-            }
+            return 1;
+            // var checkPlayer = maximizingPlayer ? _cpu.mark : _player.mark;
+            // var result = board.CheckWinner(checkPlayer);
+            // Debug.Log($"maximizingPlayer : {maximizingPlayer}, check : {checkPlayer}, result : {result}");
+            // //var result = board.CheckWinner(maximizingPlayer ? _cpu.mark : _player.mark);
+            // if (result >= 0)
+            // {
+            //     return result;
+            // }
+            //
+            // if (maximizingPlayer)
+            // {
+            //     var bestScore = int.MinValue;
+            //     foreach (var idx in board.GetEmptyBoxIndex())
+            //     {
+            //         board.SetMarkNotVisualize(idx, _cpu.mark);
+            //         var score = MiniMax(board, depth + 1, false);
+            //         board.SetMarkNotVisualize(idx, Player.Marks.None);
+            //         bestScore = math.max(score, bestScore);
+            //     }
+            //
+            //     return bestScore;
+            // }
+            // else
+            // {
+            //     var bestScore = int.MaxValue;
+            //     foreach (var idx in board.GetEmptyBoxIndex())
+            //     {
+            //         board.SetMarkNotVisualize(idx, _player.mark);
+            //         var score = MiniMax(board, depth + 1, true);
+            //         board.SetMarkNotVisualize(idx, Player.Marks.None);
+            //         bestScore = math.min(score, bestScore);
+            //     }
+            //
+            //     return bestScore;
+            // }
         }
 
         // private static int EvaluateNode(Player.Marks[] board, Player.Marks mark)
