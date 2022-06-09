@@ -10,7 +10,6 @@ namespace TicTacToe
         public Player.Marks[] BoardArray;
         public readonly int BoardDimension;
         public readonly Dictionary<int, Box> Boxes;
-        public int MarkCount;
 
         public Board(Player.Marks[] boardArray, int boardDimension, Dictionary<int, Box> boxes)
         {
@@ -23,8 +22,6 @@ namespace TicTacToe
         {
             BoardArray = new Player.Marks[BoardDimension * BoardDimension];
 
-            MarkCount = 0;
-
             foreach (var box in Boxes.Values)
             {
                 box.ResetMark();
@@ -35,15 +32,11 @@ namespace TicTacToe
         {
             Boxes[index].Set(player.mark, player.color);
             BoardArray[index] = player.mark;
-            //MarkCount++;
         }
 
         public void SetMarkNotVisualize(int index, Player.Marks mark)
         {
             BoardArray[index] = mark;
-            //if(mark == Player.Marks.None) return;
-            //PrintBoard();
-            //MarkCount++;
         }
 
         public void PrintBoard()
