@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TicTacToe
+namespace TicTacToe.GameState
 {
     public class Player2Turn : GameBaseState
     {

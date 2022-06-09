@@ -1,4 +1,4 @@
-﻿namespace TicTacToe
+﻿namespace TicTacToe.GameState
 {
     public abstract class GameBaseState
     {

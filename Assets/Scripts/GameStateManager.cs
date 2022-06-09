@@ -1,5 +1,5 @@
 ﻿using System;
-using UnityEditor;
+using TicTacToe.GameState;
 using UnityEngine;
 
 namespace TicTacToe
