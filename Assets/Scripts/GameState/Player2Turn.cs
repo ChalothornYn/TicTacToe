@@ -6,10 +6,16 @@ namespace TicTacToe.GameState
     {
         private Player _player;
 
+        public Cpu Cpu;
+
         public override void EnterState(GameStateManager game)
         {
             Debug.Log("<color=lime>Player 2 turn!</color>");
+            
             _player = game.player2;
+            
+            Cpu = new Cpu(cpu: game.player2, player:game.player1);
+            
             UIManager.Instance.ShowTurn(_player);
         }
 
@@ -18,7 +24,7 @@ namespace TicTacToe.GameState
             if (game.cpuAsPlayer2)
             {
                 // CPU decide which box to mark
-                game.boardManager.CPUSetMark(_player);
+                game.boardManager.CPUSetMark(Cpu);
             }
             else
             {

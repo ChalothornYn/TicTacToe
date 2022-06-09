@@ -468,11 +468,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardDimension: 3
-  markCount: 0
   boxLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  boardArray: 
 --- !u!1 &487249558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,7 +1236,7 @@ MonoBehaviour:
     color: {r: 0.7169812, g: 0.050729793, b: 0.10503376, a: 1}
   goFirst: 1
   cpuAsPlayer2: 0
-  board: {fileID: 435415592}
+  boardManager: {fileID: 435415592}
 --- !u!224 &696979555
 RectTransform:
   m_ObjectHideFlags: 0

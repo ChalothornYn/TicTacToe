@@ -8,8 +8,6 @@ namespace TicTacToe
     {
         [Space] public int boardDimension;
 
-        [Space] public int markCount = 0;
-        
         [Space] public LayerMask boxLayerMask;
 
         private readonly Dictionary<int, Box> _boxes = new Dictionary<int, Box>();
@@ -46,9 +44,9 @@ namespace TicTacToe
             return true;
         }
         
-        public void CPUSetMark(Player player)
+        public void CPUSetMark(Cpu cpu)
         {
-           
+            cpu.CalculateBestMove(Board);
         }
     }
 }

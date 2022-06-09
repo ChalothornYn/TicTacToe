@@ -1,29 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace TicTacToe
 {
     public class Board
     {
-        private Player.Marks[] _boardArray;
-        private readonly int _boardDimension;
-        private readonly Dictionary<int, Box> _boxes;
-        private int _markCount;
+        public Player.Marks[] BoardArray;
+        public readonly int BoardDimension;
+        public readonly Dictionary<int, Box> Boxes;
+        public int MarkCount;
 
         public Board(Player.Marks[] boardArray, int boardDimension, Dictionary<int, Box> boxes)
         {
-            _boardArray = boardArray;
-            _boardDimension = boardDimension;
-            _boxes = boxes;
+            BoardArray = boardArray;
+            BoardDimension = boardDimension;
+            Boxes = boxes;
         }
 
         public void ResetBoard()
         {
-            _boardArray = new Player.Marks[_boardDimension * _boardDimension];
+            BoardArray = new Player.Marks[BoardDimension * BoardDimension];
 
-            _markCount = 0;
+            MarkCount = 0;
             
-            foreach (var box in _boxes.Values)
+            foreach (var box in Boxes.Values)
             {
                 box.ResetMark();
             }
@@ -31,14 +33,51 @@ namespace TicTacToe
 
         public void SetMark(int index, Player player)
         {
-            _boxes[index].Set(player.mark, player.color);
-            _boardArray[index] = player.mark;
-            _markCount++;
+            Boxes[index].Set(player.mark, player.color);
+            BoardArray[index] = player.mark;
+            //MarkCount++;
+        }
+        
+        public void SetMarkNotVisualize(int index, Player.Marks mark)
+        {
+            BoardArray[index] = mark;
+            //if(mark == Player.Marks.None) return;
+            //PrintBoard();
+            //MarkCount++;
+        }
+
+        public void PrintBoard()
+        {
+            for (var i = 0; i < BoardDimension; i++)
+            {
+                Debug.Log($"{BoardArray[0 + 3*i].ToString()} {BoardArray[1 + 3*i].ToString()} {BoardArray[2 + 3*i].ToString()}");
+            }
+        }
+
+        public List<int> GetEmptyBoxIndex()
+        {
+            var indexList = new List<int>();
+            for (var i = 0; i < BoardArray.Length; i++)
+            {
+                if (BoardArray[i] == Player.Marks.None)
+                {
+                    indexList.Add(i);
+                }
+            }
+
+            //indexList.ForEach(i => Debug.Log(i));
+
+            return indexList;
+        }
+        
+        public int GetEmptyCount()
+        {
+            return BoardArray.Count(marks => marks == Player.Marks.None);
         }
 
         private bool CheckTie()
         {
-            return _markCount == _boardDimension * _boardDimension;
+            return GetEmptyCount() == 0;
         }
 
         public int CheckWinner(Player.Marks mark)
@@ -47,13 +86,13 @@ namespace TicTacToe
 
             #region Horizontal
             
-            for (var h = 0; h < _boardDimension; h++)
+            for (var h = 0; h < BoardDimension; h++)
             {
                 won = true;
-                for (var w = 0; w < _boardDimension; w++)
+                for (var w = 0; w < BoardDimension; w++)
                 {
-                    var index = w + (_boardDimension * h); // 0 1 2 // 3 4 5 // 6 7 8
-                    if (_boardArray[index] != mark)
+                    var index = w + (BoardDimension * h); // 0 1 2 // 3 4 5 // 6 7 8
+                    if (BoardArray[index] != mark)
                     {
                         won = false;
                         break;
@@ -66,13 +105,13 @@ namespace TicTacToe
             
             #region Vertical
 
-            for (var w = 0; w < _boardDimension; w++)
+            for (var w = 0; w < BoardDimension; w++)
             {
                 won = true;
-                for (var h = 0; h < _boardDimension; h++)
+                for (var h = 0; h < BoardDimension; h++)
                 {
-                    var index = w + (_boardDimension * h); // 0 3 6 // 1 4 7 // 2 5 8
-                    if (_boardArray[index] != mark)
+                    var index = w + (BoardDimension * h); // 0 3 6 // 1 4 7 // 2 5 8
+                    if (BoardArray[index] != mark)
                     {
                         won = false;
                         break;
@@ -85,12 +124,12 @@ namespace TicTacToe
 
             #region Diagonal Right to Left
 
-            var rightMost = _boardDimension - 1;
+            var rightMost = BoardDimension - 1;
             won = true;
-            for (var w = 1; w <= _boardDimension; w++)
+            for (var w = 1; w <= BoardDimension; w++)
             {
                 var index = rightMost * w; // 2 4 6
-                if (_boardArray[index] != mark)
+                if (BoardArray[index] != mark)
                 {
                     won = false;
                     break;
@@ -102,12 +141,12 @@ namespace TicTacToe
 
             #region Diagonal Left to Right
             
-            var multiplier = ((_boardDimension * _boardDimension) - 1) / (_boardDimension - 1); 
+            var multiplier = ((BoardDimension * BoardDimension) - 1) / (BoardDimension - 1); 
             won = true;
-            for (var h = 0; h < _boardDimension; h++)
+            for (var h = 0; h < BoardDimension; h++)
             {
                 var index = multiplier * h; // 0 4 8
-                if (_boardArray[index] != mark)
+                if (BoardArray[index] != mark)
                 {
                     won = false;
                     break;
