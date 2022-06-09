@@ -14,7 +14,7 @@ namespace TicTacToe
         private Player[] players;
 
         [Header("Mode : ")] 
-        public bool goFirst = true;
+        public bool playAsPlayer1 = true;
         public bool cpuAsPlayer2;
 
         [Space] public BoardManager boardManager;
@@ -39,7 +39,7 @@ namespace TicTacToe
             boardManager.Initialize();
             boardManager.Board.ResetBoard();
 
-            if (goFirst)
+            if (playAsPlayer1)
                 _currentState = Player1Turn;
             else
                 _currentState = Player2Turn;
