@@ -28,14 +28,14 @@ namespace TicTacToe
 
             if (_level == GameStateManager.Level.Easy)
             {
-                if (chance < 40)
+                if (chance < 25)
                     CalculateBestMove(board);
                 else
                     RandomMove(board);
             }
             else if (_level == GameStateManager.Level.Medium)
             {
-                if (chance < 75)
+                if (chance < 50)
                     CalculateBestMove(board);
                 else
                     RandomMove(board);

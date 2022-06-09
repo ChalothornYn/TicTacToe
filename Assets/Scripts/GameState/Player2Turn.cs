@@ -10,7 +10,7 @@ namespace TicTacToe.GameState
 
         private float _time = 0;
 
-        private readonly float[] _waitTime = new[] {1f, 1.5f, 2f};
+        private readonly float[] _waitTime = new[] {0.5f, 1f, 1.5f};
 
         public override void EnterState(GameStateManager game)
         {
@@ -32,6 +32,8 @@ namespace TicTacToe.GameState
                 _time += Time.deltaTime;
                 
                 if (_time <= _waitTime[(int)game.cpuLevel]) return;
+                
+                Debug.Log($"<color=lime>CPU Thinking : {game.cpuLevel}</color>");
                 
                 _cpu.Move(game.boardManager.Board);
                 
