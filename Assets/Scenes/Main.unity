@@ -1476,6 +1476,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4b975a04694bbeb87a97d8a3a6db9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  preset1:
+    name: Player 1
+    mark: 2
+    color: {r: 0.41037738, g: 0.56286603, b: 1, a: 1}
+  preset2:
+    name: Player 2
+    mark: 1
+    color: {r: 0.7169812, g: 0.050729793, b: 0.10503376, a: 1}
+  goFirst: 1
+  cpuAsPlayer2: 1
+  cpuLevel: 0
+  boardManager: {fileID: 435415592}
   player1:
     name: Player 1
     mark: 2
@@ -1484,10 +1496,7 @@ MonoBehaviour:
     name: Player 2
     mark: 1
     color: {r: 0.7169812, g: 0.050729793, b: 0.10503376, a: 1}
-  goFirst: 1
-  cpuAsPlayer2: 1
-  cpuLevel: 0
-  boardManager: {fileID: 435415592}
+  players: []
 --- !u!224 &696979555
 RectTransform:
   m_ObjectHideFlags: 0

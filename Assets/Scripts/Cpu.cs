@@ -11,11 +11,11 @@ namespace TicTacToe
         private readonly Player _cpu;
         private readonly Player _player;
 
-        private GameStateManager.Level _level;
+        private Level _level;
 
         private Random _rnd = new Random();
 
-        public Cpu(Player cpu, Player player, GameStateManager.Level level)
+        public Cpu(Player cpu, Player player, Level level)
         {
             _cpu = cpu;
             _player = player;
@@ -26,14 +26,14 @@ namespace TicTacToe
         {
             var chance = _rnd.Next(0, 100);
 
-            if (_level == GameStateManager.Level.Easy)
+            if (_level == Level.Easy)
             {
-                if (chance < 25)
+                if (chance < 10)
                     CalculateBestMove(board);
                 else
                     RandomMove(board);
             }
-            else if (_level == GameStateManager.Level.Medium)
+            else if (_level == Level.Medium)
             {
                 if (chance < 50)
                     CalculateBestMove(board);

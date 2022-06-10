@@ -16,19 +16,19 @@
             
             UIManager.Instance.easy.onClick.AddListener(() =>
             {
-                game.cpuLevel = GameStateManager.Level.Easy;
+                game.cpuLevel = Level.Easy;
                 _doneSetting = true;
             });
             
             UIManager.Instance.medium.onClick.AddListener(() =>
             {
-                game.cpuLevel = GameStateManager.Level.Medium;
+                game.cpuLevel = Level.Medium;
                 _doneSetting = true;
             });
             
             UIManager.Instance.hard.onClick.AddListener(() =>
             {
-                game.cpuLevel = GameStateManager.Level.Hard;
+                game.cpuLevel = Level.Hard;
                 _doneSetting = true;
             });
             

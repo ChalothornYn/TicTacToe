@@ -7,29 +7,32 @@ namespace TicTacToe
 {
     public class GameStateManager : MonoBehaviour
     {
-        [Header("Player Setting : ")]
-        public Player player1;
-        public Player player2;
-
-        private Player[] players;
-
+        [Header("Player Preset : ")]
+        public Player preset1;
+        public Player preset2;
+        
         [Header("Mode : ")] 
         public bool goFirst = true;
         public bool cpuAsPlayer2 = true;
-
-        public enum Level
-        {
-            Easy,
-            Medium,
-            Hard,
-        }
+        
         [Header("CPU Level : ")]
         public Level cpuLevel = Level.Easy;
 
-        [Space] public BoardManager boardManager;
+        [Header("Board Manager :")]
+        public BoardManager boardManager;
 
+        
+        // Player
+        [HideInInspector] public Player player1;
+        [HideInInspector] public Player player2;
+
+        [HideInInspector] public Player[] players;
+        
+        // Game Result
         public Player? Winner;
 
+        public GameResult GameResult = new GameResult(GameResult.GameStatus.ContinuePlaying, Player.Marks.None);
+        
         // Possible State
         public readonly GameStart GameStart = new GameStart();
         public readonly Player1Turn Player1Turn = new Player1Turn();
@@ -38,10 +41,11 @@ namespace TicTacToe
 
         private GameBaseState _currentState;
 
-        public GameResult GameResult = new GameResult(GameResult.GameStatus.ContinuePlaying, Player.Marks.None);
-
         private void Start()
         {
+            player1 = preset1;
+            player2 = preset2;
+            
             players = new[] {player1, player2};
             
             boardManager.Initialize();
@@ -90,6 +94,13 @@ namespace TicTacToe
         }
     }
 
+    public enum Level
+    {
+        Easy,
+        Medium,
+        Hard,
+    }
+    
     [Serializable]
     public struct Player
     {
